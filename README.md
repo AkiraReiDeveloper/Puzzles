@@ -1,8 +1,8 @@
-# demogame
+# Puzzles
 
-A new Flutter project.
+Conjunto de videojuegos de estilo rompe cabezas desarrollado en flutter.
 
-## Getting Started
+## Jugo del Gato Demo
 
 This project is a starting point for a Flutter application.
 
