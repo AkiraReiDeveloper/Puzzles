@@ -24,6 +24,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   audioplayers: ^0.14.2
+  flare_flutter: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -40,6 +41,7 @@ flutter:
     - assets/image/dialogs/
     - assets/image/background/
     - assets/music/
+    - assets/animations/
   fonts:
     - family: Birds of paradise
       fonts:

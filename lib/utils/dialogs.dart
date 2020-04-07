@@ -101,7 +101,7 @@ class Dialogs {
                                                 margin:
                                                     EdgeInsets.only(top: 10),
                                                 child: Text(
-                                                  "¡Fiesta!",
+                                                  title,
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontFamily: "Gamer",
@@ -223,9 +223,10 @@ class Dialogs {
                                             title,
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Gamer",
-                                                fontSize: 40,),
+                                              color: Colors.white,
+                                              fontFamily: "Gamer",
+                                              fontSize: 40,
+                                            ),
                                           ),
                                         ),
                                         Container(
@@ -431,29 +432,27 @@ class Dialogs {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         BotonGamer(
-                          text: "X",
-                          textSize: 100,
-                          colorCapa1: Color.fromRGBO(0, 19, 81, 1),
-                          colorCapa2: Color.fromRGBO(0, 52, 176, 1),
-                          colorCapa3: Color.fromRGBO(0, 88, 236, 1),
-                          colorCapa4: Color.fromRGBO(85, 143, 242, 0.5),
-                          width: 100,
-                          height: 120,
-                          borderSize: 10,
-                          onPressed: onConfirmX
-                        ),
+                            text: "X",
+                            textSize: 100,
+                            colorCapa1: Color.fromRGBO(0, 19, 81, 1),
+                            colorCapa2: Color.fromRGBO(0, 52, 176, 1),
+                            colorCapa3: Color.fromRGBO(0, 88, 236, 1),
+                            colorCapa4: Color.fromRGBO(85, 143, 242, 0.5),
+                            width: 100,
+                            height: 120,
+                            borderSize: 10,
+                            onPressed: onConfirmX),
                         BotonGamer(
-                          text: "O",
-                          textSize: 100,
-                          colorCapa1: Color.fromRGBO(5, 52, 0, 1),
-                          colorCapa2: Color.fromRGBO(7, 102, 0, 1),
-                          colorCapa3: Color.fromRGBO(12, 163, 0, 1),
-                          colorCapa4: Color.fromRGBO(44, 176, 28, 0.5),
-                          width: 100,
-                          height: 120,
-                          borderSize: 10,
-                          onPressed: onConfirmO
-                        )
+                            text: "O",
+                            textSize: 100,
+                            colorCapa1: Color.fromRGBO(5, 52, 0, 1),
+                            colorCapa2: Color.fromRGBO(7, 102, 0, 1),
+                            colorCapa3: Color.fromRGBO(12, 163, 0, 1),
+                            colorCapa4: Color.fromRGBO(44, 176, 28, 0.5),
+                            width: 100,
+                            height: 120,
+                            borderSize: 10,
+                            onPressed: onConfirmO)
                       ],
                     ),
                   )
