@@ -1,6 +1,6 @@
-import 'package:demogame/screens/GatoGame.dart';
 import 'package:demogame/screens/Home.dart';
-import 'package:demogame/screens/demoGato.dart';
+import 'package:demogame/screens/GatoGame.dart';
+import 'package:demogame/screens/ParesCardsGame.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -17,9 +17,10 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: "home",
       routes: {
-        'home'             : ( BuildContext context ) => Home(),
-        'gatogame'         : ( BuildContext context ) => GatoGame(),
-        'demogato'         : ( BuildContext context ) => DemoGato(),
+        'home'          : (BuildContext context) => Home(),
+        'gatogame'      : (BuildContext context) => GatoGame(),
+        //'ahorcadogame'         : ( BuildContext context ) => AhorcadoGame(),
+        'cardsgame'     : ( BuildContext context ) => ParesCardsGame(),
       },
     );
   }

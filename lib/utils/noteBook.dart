@@ -29,8 +29,10 @@ class NoteBook {
                         margin: EdgeInsets.only(bottom: 3),
                         decoration: BoxDecoration(
                             image: DecorationImage(
+                                fit: BoxFit.fill,
+                                colorFilter: ColorFilter.linearToSrgbGamma(),
                                 image: AssetImage(
-                                    "assets/image/background/background_notebook.png")),
+                                    "assets/image/background/background_notebook.jpg")),
                             color: Colors.white,
                             border: Border.all(color: Colors.black, width: 0.5),
                             borderRadius: BorderRadius.circular(15)),
@@ -47,13 +49,11 @@ class NoteBook {
                                         borderRadius: BorderRadius.vertical(
                                             top: Radius.circular(15)))),
                                 Container(
-                                    margin: EdgeInsets.all(0),
+                                    margin: EdgeInsets.all(2),
                                     height: 20,
                                     decoration: BoxDecoration(
                                         color:
                                             Color.fromRGBO(85, 143, 242, 0.5),
-                                        border: Border.all(
-                                            color: Colors.white38, width: 0.5),
                                         borderRadius: BorderRadius.vertical(
                                             top: Radius.circular(15)))),
                                 Container(

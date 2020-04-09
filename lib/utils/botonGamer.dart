@@ -99,8 +99,6 @@ class _BotonGamerState extends State<BotonGamer> with TickerProviderStateMixin {
                                 height: 20,
                                 decoration: BoxDecoration(
                                     color: widget.colorCapa4,
-                                    border: Border.all(
-                                        color: Colors.white38, width: 0.5),
                                     borderRadius: BorderRadius.vertical(
                                         top: Radius.circular(
                                             widget.borderSize)))),

@@ -3,7 +3,6 @@ import 'package:demogame/utils/dialogs.dart';
 import 'package:demogame/utils/noteBook.dart';
 import 'package:demogame/utils/sounds.dart';
 import 'package:flare_flutter/flare_actor.dart';
-import 'package:flare_flutter/flare_controller.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -44,7 +43,6 @@ class _HomeState extends State<Home> {
               children: <Widget>[
                 NoteBook.noteBook(
                   Container(
-                    color: Colors.white30,
                     width: 300,
                     height: 300,
                     child: FlareActor("assets/animations/gatogame.flr",
@@ -59,12 +57,12 @@ class _HomeState extends State<Home> {
                     BotonGamer(
                       text: "Iniciar",
                       colorCapa1: Color.fromRGBO(237, 166, 0, 1),
-                      colorCapa2: Color.fromRGBO(255, 206, 0, 1),
-                      colorCapa3: Color.fromRGBO(250, 229, 0, 1),
-                      colorCapa4: Color.fromRGBO(251, 237, 85, 0.5),
+                      colorCapa2: Color.fromRGBO(255, 200, 0, 1),
+                      colorCapa3: Color.fromRGBO(255, 219, 0, 1),
+                      colorCapa4: Color.fromRGBO(251, 232, 85, 0.5),
                       borderSize: 10,
                       onPressed: () {
-                        Navigator.pushNamed(context, "demogato");
+                        Navigator.pushNamed(context, "cardsgame");
                       },
                     ),
                     SizedBox(
