@@ -42,6 +42,8 @@ flutter:
     - assets/image/background/
     - assets/music/
     - assets/animations/
+    - assets/image/cards/
+    - assets/image/icons/
   fonts:
     - family: Birds of paradise
       fonts:

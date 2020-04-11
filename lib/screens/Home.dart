@@ -4,6 +4,7 @@ import 'package:demogame/utils/noteBook.dart';
 import 'package:demogame/utils/sounds.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class Home extends StatefulWidget {
   Home({Key key, this.title}) : super(key: key);
@@ -29,6 +30,9 @@ class _HomeState extends State<Home> {
       body: Center(
         child: Center(
           child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
               image: DecorationImage(
                   colorFilter: ColorFilter.mode(
@@ -38,57 +42,52 @@ class _HomeState extends State<Home> {
                     "assets/image/background/background_mosaico.png",
                   )),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                NoteBook.noteBook(
-                  Container(
-                    width: 300,
-                    height: 300,
-                    child: FlareActor("assets/animations/gatogame.flr",
-                        alignment: Alignment.center,
-                        fit: BoxFit.contain,
-                        animation: "gato_example"),
+                Container(
+                  child: BotonGamer(
+                    text: "Gato",
+                    colorCapa1: Color.fromRGBO(0, 19, 81, 1),
+                    colorCapa2: Color.fromRGBO(0, 52, 176, 1),
+                    colorCapa3: Color.fromRGBO(0, 88, 236, 1),
+                    colorCapa4: Color.fromRGBO(85, 143, 242, 0.5),
+                    borderSize: 10,
+                    onPressed: () {
+                      Navigator.pushNamed(context, "gatogame");
+                    },
+                    icon: Container(
+                      width: 50,
+                      height: 45,
+                      child: FlareActor("assets/animations/gatogame.flr",
+                          shouldClip: false,
+                          alignment: Alignment.center,
+                          fit: BoxFit.fill,
+                          animation: "gato_example"),
+                    ),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    BotonGamer(
-                      text: "Iniciar",
-                      colorCapa1: Color.fromRGBO(237, 166, 0, 1),
-                      colorCapa2: Color.fromRGBO(255, 200, 0, 1),
-                      colorCapa3: Color.fromRGBO(255, 219, 0, 1),
-                      colorCapa4: Color.fromRGBO(251, 232, 85, 0.5),
-                      borderSize: 10,
-                      onPressed: () {
-                        Navigator.pushNamed(context, "cardsgame");
-                      },
+                Container(
+                  child: BotonGamer(
+                    text: "Pares",
+                    colorCapa1: Color.fromRGBO(0, 19, 81, 1),
+                    colorCapa2: Color.fromRGBO(0, 52, 176, 1),
+                    colorCapa3: Color.fromRGBO(0, 88, 236, 1),
+                    colorCapa4: Color.fromRGBO(85, 143, 242, 0.5),
+                    borderSize: 10,
+                    onPressed: () {
+                      Navigator.pushNamed(context, "juegorapido");
+                    },
+                    icon: Container(
+                      width: 35,
+                      height: 50,
+                      child: FlareActor("assets/animations/card_joker.flr",
+                          shouldClip: false,
+                          alignment: Alignment.center,
+                          fit: BoxFit.fill,
+                          animation: "joker_reaction_left"),
                     ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    BotonGamer(
-                      text: "¡Información!",
-                      colorCapa1: Color.fromRGBO(0, 19, 81, 1),
-                      colorCapa2: Color.fromRGBO(0, 52, 176, 1),
-                      colorCapa3: Color.fromRGBO(0, 88, 236, 1),
-                      colorCapa4: Color.fromRGBO(85, 143, 242, 0.5),
-                      borderSize: 10,
-                      textSize: 30,
-                      onPressed: () {
-                        /*if (_controllerA.isCompleted) {
-                          _controllerA.reverse();
-                        } else {
-                          _controllerA.forward(from: 0.0);
-                        }*/
-                        Dialogs.alert(context,
-                            title: "¡Información!",
-                            message:
-                                "Este juego está en fase de demostración por lo tanto podría tener algunos errores. \nCon el paso de los días otros puzzles serán agregados.");
-                      },
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),
@@ -97,4 +96,45 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+/*
+  Widget _selectedGame({VoidCallback onSelected, FlareActor animation}) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        NoteBook.noteBook(
+          Container(constraints: BoxConstraints.expand(), child: animation),
+        ),
+        Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              BotonGamer(
+                  text: "Iniciar",
+                  colorCapa1: Color.fromRGBO(237, 166, 0, 1),
+                  colorCapa2: Color.fromRGBO(255, 200, 0, 1),
+                  colorCapa3: Color.fromRGBO(255, 219, 0, 1),
+                  colorCapa4: Color.fromRGBO(251, 232, 85, 0.5),
+                  borderSize: 10,
+                  onPressed: onSelected),
+              /*BotonGamer(
+                text: "¡Información!",
+                colorCapa1: Color.fromRGBO(0, 19, 81, 1),
+                colorCapa2: Color.fromRGBO(0, 52, 176, 1),
+                colorCapa3: Color.fromRGBO(0, 88, 236, 1),
+                colorCapa4: Color.fromRGBO(85, 143, 242, 0.5),
+                borderSize: 10,
+                textSize: 30,
+                onPressed: () {
+                  Dialogs.alert(context,
+                      title: "¡Información!",
+                      message:
+                          "Este juego está en fase de demostración por lo tanto podría tener algunos errores. \nCon el paso de los días otros puzzles serán agregados.");
+                },
+              ),*/
+            ],
+          ),
+        ),
+      ],
+    );
+  }*/
 }

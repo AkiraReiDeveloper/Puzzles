@@ -1,5 +1,6 @@
 import 'package:demogame/screens/Home.dart';
 import 'package:demogame/screens/GatoGame.dart';
+import 'package:demogame/screens/ModoJuegoRapido.dart';
 import 'package:demogame/screens/ParesCardsGame.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         'gatogame'      : (BuildContext context) => GatoGame(),
         //'ahorcadogame'         : ( BuildContext context ) => AhorcadoGame(),
         'cardsgame'     : ( BuildContext context ) => ParesCardsGame(),
+        'juegorapido'   : ( BuildContext context ) => ModoJuegoRapido(),
       },
     );
   }

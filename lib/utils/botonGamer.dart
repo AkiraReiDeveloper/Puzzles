@@ -13,6 +13,7 @@ class BotonGamer extends StatefulWidget {
   final double width;
   final double height;
   final Color textColor;
+  final Widget icon;
 
   BotonGamer(
       {@required this.text,
@@ -26,7 +27,8 @@ class BotonGamer extends StatefulWidget {
       this.height = 90.0,
       @required this.onPressed,
       this.borderSize = 15,
-      this.textColor = Colors.white});
+      this.textColor = Colors.white,
+      this.icon});
 
   @override
   _BotonGamerState createState() => _BotonGamerState();
@@ -92,44 +94,41 @@ class _BotonGamerState extends State<BotonGamer> with TickerProviderStateMixin {
                           borderRadius:
                               BorderRadius.circular(widget.borderSize)),
                       child: Container(
-                        child: Stack(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Row(
+                          mainAxisAlignment: widget.icon != null ? MainAxisAlignment.spaceBetween : MainAxisAlignment.center,
                           children: <Widget>[
-                            Container(
-                                margin: EdgeInsets.all(5),
-                                height: 20,
-                                decoration: BoxDecoration(
-                                    color: widget.colorCapa4,
-                                    borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(
-                                            widget.borderSize)))),
-                            Positioned(
-                                width: 6,
-                                height: 5,
-                                top: 4,
-                                right: 4,
-                                child: Container(
+                            widget.icon != null ? widget.icon : Container(), 
+                            Stack(
+                              children: <Widget>[
+                                Container(
+                                    margin: EdgeInsets.all(5),
+                                    height: 20,
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(500),
-                                        color: Colors.white))),
-                            Center(
-                              child: Text(
-                                widget.text,
-                                style: TextStyle(
-                                    height: 0.95,
-                                    fontFamily: "Gamer",
-                                    fontSize: widget.textSize,
-                                    color: Color.fromRGBO(35, 35, 35, 1)),
-                              ),
-                            ),
-                            Center(
-                              child: Text(
-                                widget.text,
-                                style: TextStyle(
-                                    fontFamily: "Gamer",
-                                    fontSize: widget.textSize,
-                                    color: widget.textColor),
-                              ),
+                                        color: widget.colorCapa4,
+                                        borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(
+                                                widget.borderSize)))),
+                                Center(
+                                  child: Text(
+                                    widget.text,
+                                    style: TextStyle(
+                                        height: 0.95,
+                                        fontFamily: "Gamer",
+                                        fontSize: widget.textSize,
+                                        color: Color.fromRGBO(35, 35, 35, 1)),
+                                  ),
+                                ),
+                                Center(
+                                  child: Text(
+                                    widget.text,
+                                    style: TextStyle(
+                                        fontFamily: "Gamer",
+                                        fontSize: widget.textSize,
+                                        color: widget.textColor),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),

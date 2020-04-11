@@ -321,7 +321,11 @@ class _GatoGameState extends State<GatoGame> {
           listaIsSelected[index] = true;
         }
       } else {
-        Dialogs.alertWin(context, title: "Debes Seleccionar una Ficha");
+        Dialogs.alertWin(context,
+            title: "Debes Seleccionar una Ficha",
+            titleSize: 40, onContinue: () {
+          Navigator.of(context).pop();
+        });
       }
     });
 
@@ -484,13 +488,20 @@ class _GatoGameState extends State<GatoGame> {
     if (numPlayer1 + numPlayer2 == 8 || numPlayer1 == 5 || numPlayer2 == 5) {
       if (numPlayer1 > numPlayer2) {
         Dialogs.alertWin(context,
-            title: "El jugador " + player1 + " es el ganador");
+            title: "El jugador " + player1 + " es el ganador", onContinue: () {
+          Navigator.of(context).pop();
+        });
       } else {
         if (numPlayer1 == numPlayer2) {
-          Dialogs.alertWin(context, title: "Esto es un empate");
+          Dialogs.alertWin(context, title: "Esto es un empate", onContinue: () {
+            Navigator.of(context).pop();
+          });
         } else {
           Dialogs.alertWin(context,
-              title: "El jugador " + player2 + " es el ganador");
+              title: "El jugador " + player2 + " es el ganador",
+              onContinue: () {
+            Navigator.of(context).pop();
+          });
         }
       }
       numPlayer1 = 0;
@@ -501,10 +512,16 @@ class _GatoGameState extends State<GatoGame> {
     if (fichaIsSelected && !reiniciarBoton) {
       if (iterate) {
         Dialogs.alertWin(context,
-            title: "El siguiente turno es para el jugador " + player2);
+            title: "El siguiente turno es para el jugador " + player2,
+            onContinue: () {
+          Navigator.of(context).pop();
+        });
       } else {
         Dialogs.alertWin(context,
-            title: "El siguiente turno es para el jugador " + player1);
+            title: "El siguiente turno es para el jugador " + player1,
+            onContinue: () {
+          Navigator.of(context).pop();
+        });
       }
     }
     if (!playGame) {

@@ -161,6 +161,25 @@ class Dialogs {
                                             ),
                                           ),
                                         ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 10, right: 10),
+                                          child: BotonGamer(
+                                              text: "X",
+                                              colorCapa1:
+                                                  Color.fromRGBO(167, 1, 22, 1),
+                                              colorCapa2:
+                                                  Color.fromRGBO(214, 1, 21, 1),
+                                              colorCapa3:
+                                                  Color.fromRGBO(214, 1, 21, 1),
+                                              colorCapa4: Color.fromRGBO(
+                                                  255, 111, 126, 1),
+                                              width: 40,
+                                              height: 40,
+                                              textSize: 30,
+                                              borderSize: 5,
+                                              onPressed: onContinue),
+                                        ),
                                       ],
                                     ),
                                   ))))),
@@ -171,10 +190,13 @@ class Dialogs {
 
   static alertWin(BuildContext context,
       {String title = '',
+      String message = '',
+      double titleSize = 55,
       IconData icon = Icons.add_alert,
       Color color = Colors.cyan,
       VoidCallback onContinue,
-      bool localMethod = true}) {
+      bool stars = false,
+      int starValue = 0}) {
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -217,10 +239,46 @@ class Dialogs {
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
+                                        stars ? Container(
+                                          margin: EdgeInsets.all(10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.stars,
+                                                size: 50,
+                                                color: starValue >= 30 ? Colors.yellow : Colors.grey,
+                                              ),
+                                              Icon(
+                                                Icons.stars,
+                                                size: 50,
+                                                color: starValue >= 50 ? Colors.yellow : Colors.grey,
+                                              ),
+                                              Icon(
+                                                Icons.stars,
+                                                size: 50,
+                                                color: starValue == 100 ? Colors.yellow : Colors.grey,
+                                              ),
+                                            ],
+                                          ),
+                                        ):Container(),
                                         Container(
                                           margin: EdgeInsets.all(10),
                                           child: Text(
                                             title,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Gamer",
+                                              fontSize: titleSize,
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.all(10),
+                                          child: Text(
+                                            message,
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Colors.white,
@@ -246,9 +304,7 @@ class Dialogs {
                                               width: 100,
                                               height: 50,
                                               textSize: 30,
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              }),
+                                              onPressed: onContinue),
                                         ),
                                       ],
                                     ),
