@@ -37,8 +37,6 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
-    - assets/image/botons/
-    - assets/image/dialogs/
     - assets/image/background/
     - assets/music/
     - assets/animations/
