@@ -1,7 +1,7 @@
 import 'package:demogame/utils/animated_card_background.dart';
 import 'package:demogame/utils/animations_comments.dart';
 import 'package:demogame/utils/botonGamer.dart';
-import 'package:demogame/utils/sounds.dart';
+//import 'package:demogame/utils/sounds.dart';
 import 'package:demogame/utils/userPreferences.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Sounds soundsEffects = new Sounds();
+  //Sounds soundsEffects = new Sounds();
   UserPreferences userPreferences = new UserPreferences();
   bool musicOn = true;
 
@@ -109,15 +109,13 @@ class _HomeState extends State<Home> {
                   child: GestureDetector(
                     onTap: () {
                       if (musicOn) {
-                        soundsEffects.stopLocalMusic();
+                        //soundsEffects.stopLocalMusic();
                         musicOn = false;
                       } else {
-                        soundsEffects
-                            .playLocalMusic("music/and_i_love_her.mid");
+                        //soundsEffects.playLocalMusic("music/and_i_love_her.mid");
                         musicOn = true;
                       }
-                      setState(() {                   
-                      });
+                      setState(() {});
                     },
                     child: Container(
                         child: !musicOn

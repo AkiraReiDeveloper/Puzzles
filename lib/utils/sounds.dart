@@ -1,4 +1,4 @@
-import 'package:audioplayers/audio_cache.dart';
+/*import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class Sounds{
@@ -19,4 +19,4 @@ class Sounds{
   void stopLocalMusic() async {
     audioPlayer.stop();
   }
-}
+}*/

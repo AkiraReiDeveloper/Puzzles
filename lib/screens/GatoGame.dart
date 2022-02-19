@@ -1,6 +1,6 @@
 import 'package:demogame/utils/botonGamer.dart';
 import 'package:demogame/utils/dialogs.dart';
-import 'package:demogame/utils/sounds.dart';
+//import 'package:demogame/utils/sounds.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ class GatoGame extends StatefulWidget {
 }
 
 class _GatoGameState extends State<GatoGame> {
-  Sounds soundsEffects = new Sounds();
+  //Sounds soundsEffects = new Sounds();
   String player1Wins = "";
   String player2Wins = "";
   String player1;
@@ -82,8 +82,7 @@ class _GatoGameState extends State<GatoGame> {
                               borderSize: 10,
                               onPressed: () {
                                 setState(() {
-                                  soundsEffects
-                                      .playLocalEffects("music/switch38.wav");
+                                  //soundsEffects.playLocalEffects("music/switch38.wav");
                                   reiniciarBoton = true;
                                   resetValues();
                                 });
@@ -100,8 +99,7 @@ class _GatoGameState extends State<GatoGame> {
                                   colorCapa4: Color.fromRGBO(44, 176, 28, 0.5),
                                   borderSize: 10,
                                   onPressed: () {
-                                    soundsEffects
-                                        .playLocalEffects("music/switch38.wav");
+                                    //soundsEffects.playLocalEffects("music/switch38.wav");
                                     Dialogs.fichaCatSelected(context,
                                         title: "Player 1",
                                         message: "¡Selecciona tu ficha!",
@@ -125,8 +123,7 @@ class _GatoGameState extends State<GatoGame> {
                                             Color.fromRGBO(0, 89, 236, 1);
                                         Navigator.of(context).pop();
                                         fichaIsSelected = true;
-                                        soundsEffects.playLocalEffects(
-                                            "music/switch38.wav");
+                                        //soundsEffects.playLocalEffects("music/switch38.wav");
                                       });
                                     }, onConfirmX: () {
                                       setState(() {
@@ -148,8 +145,7 @@ class _GatoGameState extends State<GatoGame> {
                                             Color.fromRGBO(0, 163, 0, 1);
                                         Navigator.of(context).pop();
                                         fichaIsSelected = true;
-                                        soundsEffects.playLocalEffects(
-                                            "music/switch38.wav");
+                                        //soundsEffects.playLocalEffects("music/switch38.wav");
                                       });
                                     });
                                   })
@@ -222,16 +218,16 @@ class _GatoGameState extends State<GatoGame> {
           child: Stack(
             children: <Widget>[
               Container(
-                width: width,
+                  width: width,
                   child: Text(
-                "Victorias",
-                style: TextStyle(
-                    color: Color.fromRGBO(190, 145, 0, 1),
-                    fontSize: 50,
-                    fontFamily: "Gamer",
-                    height: 0.90),
-                textAlign: TextAlign.center,
-              )),
+                    "Victorias",
+                    style: TextStyle(
+                        color: Color.fromRGBO(190, 145, 0, 1),
+                        fontSize: 50,
+                        fontFamily: "Gamer",
+                        height: 0.90),
+                    textAlign: TextAlign.center,
+                  )),
               Container(
                   width: width,
                   child: Text(
