@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:demogame/utils/animations_comments.dart';
 import 'package:demogame/utils/dialogs.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,6 +25,7 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
   int cardSelected;
   bool isProcessed;
   bool gameStart;
+  bool sonPares;
 //cronometro
   final _stopWatch = new Stopwatch();
   final _timeout = const Duration(seconds: 1);
@@ -33,9 +35,9 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
   int movimientos;
   int pares;
   int combo;
-
   int ancho = 3;
   int largo = 2;
+  String textAnimation;
 
   @override
   void initState() {
@@ -46,6 +48,7 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
   }
 
   _inicializarValues() {
+    textAnimation = "¡Bien!";
     stars = 0;
     cronometroTime = "00:00";
     cardAnimatedList = [];
@@ -58,6 +61,7 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
     cardSelected = 0;
     isProcessed = false;
     gameStart = false;
+    sonPares = false;
     puntos = 0;
     movimientos = 0;
     pares = 0;
@@ -70,40 +74,38 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
   Widget build(BuildContext context) {
     final String dimention = ModalRoute.of(context).settings.arguments;
     if (dimention != null && !gameStart) {
-      ancho = int.parse(dimention.substring(0, 1));
-      largo = int.parse(dimention.substring(2, 3));
+      ancho = int.parse(dimention.split(new RegExp(r'x'))[0]);
+      largo = int.parse(dimention.split(new RegExp(r'x'))[1]);
       _initialValues(globalIndex = ((ancho * largo) / 2).round());
       gameStart = !gameStart;
     }
     return Scaffold(
-        appBar: new PreferredSize(
-            child: Container(), preferredSize: Size.fromHeight(0)),
-        body: Stack(
-          children: <Widget>[
-            Center(
-                child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    colorFilter: ColorFilter.mode(
-                        Color.fromRGBO(248, 6, 50, 0.5), BlendMode.color),
-                    fit: BoxFit.fill,
-                    image: AssetImage(
-                      "assets/image/background/background_mosaico.png",
-                    )),
-              ),
-              child: Column(
-                children: <Widget>[
-                  barToVictorius(),
-                  Expanded(
-                    child: Container(
-                      child: cardListMethod(),
-                    ),
-                  ),
-                ],
-              ),
-            )),
-          ],
-        ));
+      appBar: new PreferredSize(
+          child: Container(), preferredSize: Size.fromHeight(0)),
+      body: Center(
+          child: Stack(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  colorFilter: ColorFilter.mode(
+                      Color.fromRGBO(248, 6, 50, 0.5), BlendMode.color),
+                  fit: BoxFit.fill,
+                  image: AssetImage(
+                    "assets/image/background/background_mosaico.png",
+                  )),
+            ),
+            child: Column(
+              children: <Widget>[
+                barToVictorius(),
+                Expanded(child: cardListMethod()),
+              ],
+            ),
+          ),
+          sonPares ? AnimationsComments(textAnimation) : Container(),
+        ],
+      )),
+    );
   }
 
   Widget cardListMethod() {
@@ -145,8 +147,8 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
     return new Container(
       margin: EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
-        color: Color.fromRGBO(248, 6, 50, 1),
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(5)),
+        color: Color.fromRGBO(248, 6, 50, 1),
       ),
       width: width,
       child: Column(children: <Widget>[
@@ -283,12 +285,22 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
       cardIndex2 = index;
       cardSelected2 = cardIndex;
       if (cardSelected1 == cardSelected2) {
-        cardSelected = 0;
-        puntos += 100 * combo;
-        combo++;
-        movimientos++;
-        pares++;
-        _endGame();
+        setState(() {
+          combo > 1
+              ? textAnimation = "Combo X" + combo.toString()
+              : textAnimation = "¡Bien!";
+          cardSelected = 0;
+          puntos += 100 * combo;
+          combo++;
+          movimientos++;
+          pares++;
+          sonPares = true;
+          _endGame();
+        });
+        await Future.delayed(const Duration(milliseconds: 1000), () {});
+        setState(() {
+          sonPares = false;
+        });
       } else {
         setState(() {
           combo = 1;

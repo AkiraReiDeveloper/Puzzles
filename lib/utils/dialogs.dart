@@ -252,7 +252,7 @@ class Dialogs {
                                               ),
                                               Icon(
                                                 Icons.stars,
-                                                size: 50,
+                                                size: 70,
                                                 color: starValue >= 50 ? Colors.yellow : Colors.grey,
                                               ),
                                               Icon(

@@ -222,6 +222,7 @@ class _GatoGameState extends State<GatoGame> {
           child: Stack(
             children: <Widget>[
               Container(
+                width: width,
                   child: Text(
                 "Victorias",
                 style: TextStyle(
@@ -233,7 +234,6 @@ class _GatoGameState extends State<GatoGame> {
               )),
               Container(
                   width: width,
-                  color: Color.fromRGBO(34, 34, 34, 1),
                   child: Text(
                     "Victorias",
                     style: TextStyle(

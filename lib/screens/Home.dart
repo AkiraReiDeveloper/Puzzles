@@ -1,7 +1,8 @@
+import 'package:demogame/utils/animated_card_background.dart';
+import 'package:demogame/utils/animations_comments.dart';
 import 'package:demogame/utils/botonGamer.dart';
-import 'package:demogame/utils/dialogs.dart';
-import 'package:demogame/utils/noteBook.dart';
 import 'package:demogame/utils/sounds.dart';
+import 'package:demogame/utils/userPreferences.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -17,15 +18,23 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   Sounds soundsEffects = new Sounds();
+  UserPreferences userPreferences = new UserPreferences();
+  bool musicOn = true;
 
   @override
-  void setState(fn) {
-    super.setState(fn);
+  void initState() {
+    //soundsEffects.playLocalMusic("music/and_i_love_her.mid");
+    //_initialPreferences();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    //soundsEffects.playLocalMusic("music/and_i_love_her.mid");
     return Scaffold(
       body: Center(
         child: Center(
@@ -42,59 +51,107 @@ class _HomeState extends State<Home> {
                     "assets/image/background/background_mosaico.png",
                   )),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Stack(
+              alignment: Alignment.center,
               children: <Widget>[
-                Container(
-                  child: BotonGamer(
-                    text: "Gato",
-                    colorCapa1: Color.fromRGBO(0, 19, 81, 1),
-                    colorCapa2: Color.fromRGBO(0, 52, 176, 1),
-                    colorCapa3: Color.fromRGBO(0, 88, 236, 1),
-                    colorCapa4: Color.fromRGBO(85, 143, 242, 0.5),
-                    borderSize: 10,
-                    onPressed: () {
-                      Navigator.pushNamed(context, "gatogame");
-                    },
-                    icon: Container(
-                      width: 50,
-                      height: 45,
-                      child: FlareActor("assets/animations/gatogame.flr",
-                          shouldClip: false,
-                          alignment: Alignment.center,
-                          fit: BoxFit.fill,
-                          animation: "gato_example"),
+                Animations(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      child: BotonGamer(
+                        text: "Gato",
+                        colorCapa1: Color.fromRGBO(0, 19, 81, 1),
+                        colorCapa2: Color.fromRGBO(0, 52, 176, 1),
+                        colorCapa3: Color.fromRGBO(0, 88, 236, 1),
+                        colorCapa4: Color.fromRGBO(85, 143, 242, 0.5),
+                        borderSize: 10,
+                        onPressed: () {
+                          Navigator.pushNamed(context, "gatogame");
+                        },
+                        icon: Container(
+                          width: 50,
+                          height: 45,
+                          child: FlareActor("assets/animations/gatogame.flr",
+                              shouldClip: false,
+                              alignment: Alignment.center,
+                              fit: BoxFit.fill,
+                              animation: "gato_example"),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                Container(
-                  child: BotonGamer(
-                    text: "Pares",
-                    colorCapa1: Color.fromRGBO(0, 19, 81, 1),
-                    colorCapa2: Color.fromRGBO(0, 52, 176, 1),
-                    colorCapa3: Color.fromRGBO(0, 88, 236, 1),
-                    colorCapa4: Color.fromRGBO(85, 143, 242, 0.5),
-                    borderSize: 10,
-                    onPressed: () {
-                      Navigator.pushNamed(context, "juegorapido");
-                    },
-                    icon: Container(
-                      width: 35,
-                      height: 50,
-                      child: FlareActor("assets/animations/card_joker.flr",
-                          shouldClip: false,
-                          alignment: Alignment.center,
-                          fit: BoxFit.fill,
-                          animation: "joker_reaction_left"),
+                    Container(
+                      child: BotonGamer(
+                        text: "Pares",
+                        colorCapa1: Color.fromRGBO(0, 19, 81, 1),
+                        colorCapa2: Color.fromRGBO(0, 52, 176, 1),
+                        colorCapa3: Color.fromRGBO(0, 88, 236, 1),
+                        colorCapa4: Color.fromRGBO(85, 143, 242, 0.5),
+                        borderSize: 10,
+                        onPressed: () {
+                          Navigator.pushNamed(context, "cardsgamemode");
+                        },
+                        icon: Container(
+                          width: 35,
+                          height: 50,
+                          child: FlareActor("assets/animations/card_joker.flr",
+                              shouldClip: false,
+                              alignment: Alignment.center,
+                              fit: BoxFit.fill,
+                              animation: "joker_reaction_left"),
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: GestureDetector(
+                    onTap: () {
+                      if (musicOn) {
+                        soundsEffects.stopLocalMusic();
+                        musicOn = false;
+                      } else {
+                        soundsEffects
+                            .playLocalMusic("music/and_i_love_her.mid");
+                        musicOn = true;
+                      }
+                      setState(() {                   
+                      });
+                    },
+                    child: Container(
+                        child: !musicOn
+                            ? Icon(
+                                Icons.volume_off,
+                                size: 40,
+                                color: Colors.white,
+                              )
+                            : Icon(
+                                Icons.volume_up,
+                                size: 40,
+                                color: Colors.white,
+                              )),
+                  ),
+                )
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  _initialPreferences() {
+    setState(() {
+      if (userPreferences.gameStart == false) {
+        userPreferences.gameStart = true;
+        userPreferences.levelsDisabled = List.filled(100, "false");
+        userPreferences.levelsDisabled[1] = "true";
+        userPreferences.stars = List.filled(100, "0");
+        userPreferences.totalStars = 0;
+        print("Entro");
+      }
+    });
   }
 /*
   Widget _selectedGame({VoidCallback onSelected, FlareActor animation}) {
