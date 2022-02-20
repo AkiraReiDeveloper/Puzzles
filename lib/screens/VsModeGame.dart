@@ -33,7 +33,8 @@ class _VsModeGameState extends State<VsModeGame> {
   int puntosPlayer1;
   int puntosPlayer2;
   bool playerActive;
-  int movimientos;
+  int movimientosPlayer1;
+  int movimientosPlayer2;
   int pares;
   int combo;
   int ancho = 3;
@@ -66,7 +67,8 @@ class _VsModeGameState extends State<VsModeGame> {
     puntosPlayer1 = 0;
     puntosPlayer2 = 0;
     playerActive = true;
-    movimientos = 0;
+    movimientosPlayer1 = 0;
+    movimientosPlayer2 = 0;
     pares = 0;
     combo = 1;
     stopwatch = new Stopwatch();
@@ -173,7 +175,7 @@ class _VsModeGameState extends State<VsModeGame> {
                         Text("P1",
                             textAlign: TextAlign.justify,
                             style: TextStyle(
-                                fontSize: 25,
+                                fontSize: playerActive ? 35 : 25,
                                 fontFamily: "Gamer",
                                 color:
                                     playerActive ? Colors.cyan : Colors.white)),
@@ -191,7 +193,7 @@ class _VsModeGameState extends State<VsModeGame> {
                             decoration: BoxDecoration(
                                 color: Colors.white70,
                                 borderRadius: BorderRadius.circular(5)),
-                            child: Text(movimientos.toString(),
+                            child: Text(movimientosPlayer1.toString(),
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
                                     fontSize: 25, fontFamily: "Gamer")),
@@ -253,7 +255,7 @@ class _VsModeGameState extends State<VsModeGame> {
                             decoration: BoxDecoration(
                                 color: Colors.white70,
                                 borderRadius: BorderRadius.circular(5)),
-                            child: Text(movimientos.toString(),
+                            child: Text(movimientosPlayer2.toString(),
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
                                     fontSize: 25, fontFamily: "Gamer")),
@@ -277,7 +279,7 @@ class _VsModeGameState extends State<VsModeGame> {
                         Text("P2",
                             textAlign: TextAlign.justify,
                             style: TextStyle(
-                                fontSize: 25,
+                                fontSize: playerActive ? 25 : 35,
                                 fontFamily: "Gamer",
                                 color:
                                     playerActive ? Colors.white : Colors.cyan)),
@@ -375,6 +377,7 @@ class _VsModeGameState extends State<VsModeGame> {
   }
 
   _validCardPar(int index, int cardIndex) async {
+    bool change = false;
     cardSelected++;
     if (cardSelected == 1) {
       cardIndex1 = index;
@@ -390,12 +393,13 @@ class _VsModeGameState extends State<VsModeGame> {
           cardSelected = 0;
           if (playerActive) {
             puntosPlayer1 += 100 * combo;
+            movimientosPlayer1++;
           } else {
             puntosPlayer2 += 100 * combo;
+            movimientosPlayer2++;
           }
-
+          change = true;
           combo++;
-          movimientos++;
           pares++;
           sonPares = true;
           _endGame();
@@ -408,7 +412,7 @@ class _VsModeGameState extends State<VsModeGame> {
         setState(() {
           combo = 1;
           isProcessed = true;
-          movimientos++;
+          playerActive ? movimientosPlayer1++ : movimientosPlayer2++;
         });
         await Future.delayed(const Duration(seconds: 1), () {});
         setState(() {
@@ -420,7 +424,7 @@ class _VsModeGameState extends State<VsModeGame> {
           cardSelected = 0;
         });
       }
-      playerActive = !playerActive;
+      if (!change) playerActive = !playerActive;
     }
   }
 
@@ -454,16 +458,16 @@ class _VsModeGameState extends State<VsModeGame> {
   _calcularPuntos() {
     int valorBase = ancho * largo;
     int valorTiempo = int.parse(cronometroTime.replaceAll(":", ""));
-    puntosPlayer1 += (puntosPlayer1 / movimientos).round();
+    puntosPlayer1 += (puntosPlayer1 / movimientosPlayer1).round();
     puntosPlayer1 += (puntosPlayer1 / valorTiempo).round();
-    if (movimientos <= valorBase && valorTiempo <= ancho * 100) {
+    if (movimientosPlayer1 <= valorBase && valorTiempo <= ancho * 100) {
       stars = 100;
     } else {
-      if (movimientos <= (valorBase * 1.3).round() &&
+      if (movimientosPlayer1 <= (valorBase * 1.3).round() &&
           valorTiempo <= ((ancho * 100) * 1.3).round()) {
         stars = 50;
       } else {
-        if (movimientos <= (valorBase * 1.5).round() &&
+        if (movimientosPlayer1 <= (valorBase * 1.5).round() &&
             valorTiempo <= ((ancho * 100) * 1.5).round()) {
           stars = 30;
         } else {
@@ -485,7 +489,7 @@ class _VsModeGameState extends State<VsModeGame> {
           message: "Puntos: " +
               puntosPlayer1.toString() +
               "\nMovimientos: " +
-              movimientos.toString() +
+              movimientosPlayer1.toString() +
               "\nTiempo: " +
               cronometroTime,
           stars: true,
