@@ -55,8 +55,8 @@ class _HomeState extends State<Home> {
               alignment: Alignment.center,
               children: <Widget>[
                 Animations(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
                       child: BotonGamer(
@@ -66,6 +66,7 @@ class _HomeState extends State<Home> {
                         colorCapa3: Color.fromRGBO(0, 88, 236, 1),
                         colorCapa4: Color.fromRGBO(85, 143, 242, 0.5),
                         borderSize: 10,
+                        width: 250,
                         onPressed: () {
                           Navigator.pushNamed(context, "gatogame");
                         },
@@ -80,6 +81,7 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 10.0),
                     Container(
                       child: BotonGamer(
                         text: "Pares",
@@ -88,6 +90,7 @@ class _HomeState extends State<Home> {
                         colorCapa3: Color.fromRGBO(0, 88, 236, 1),
                         colorCapa4: Color.fromRGBO(85, 143, 242, 0.5),
                         borderSize: 10,
+                        width: 250,
                         onPressed: () {
                           Navigator.pushNamed(context, "cardsgamemode");
                         },

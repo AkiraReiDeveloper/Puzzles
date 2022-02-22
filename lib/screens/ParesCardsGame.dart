@@ -6,6 +6,7 @@ import 'package:demogame/utils/dialogs.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 
 class ParesCardsGame extends StatefulWidget {
   @override
@@ -13,6 +14,9 @@ class ParesCardsGame extends StatefulWidget {
 }
 
 class _ParesCardsGameState extends State<ParesCardsGame> {
+  //Grid Values
+  //List<ItemCardData> cardContent;
+
   List<Widget> cardAnimatedList;
   List<int> cardList;
   List<bool> isSelectedList;
@@ -98,7 +102,7 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
             child: Column(
               children: <Widget>[
                 barToVictorius(),
-                Expanded(child: cardListMethod()),
+                Expanded(child: cardMethod()),
               ],
             ),
           ),
@@ -113,7 +117,54 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
       margin: EdgeInsets.all(10),
       child: GridView.count(
         crossAxisCount: ancho,
-        childAspectRatio: (100 / 130),
+        childAspectRatio: (3 / 3),
+        children: List.generate(cardList.length, (index) {
+          return Center(
+              child: Container(
+            margin: EdgeInsets.all(.5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              border: Border.all(color: Colors.black, width: 3),
+            ),
+            child: RaisedButton(
+                padding: EdgeInsets.all(0),
+                color: Colors.white,
+                onPressed: () => !isSelectedList[index]
+                    ? _onClick(index, cardList[index])
+                    : () {},
+                child: Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage("assets/image/cards/" +
+                                cardList[index].toString() +
+                                ".png"),
+                            fit: BoxFit.contain)),
+                    child: cardAnimatedList[index])),
+          ));
+        }),
+      ),
+    );
+  }
+
+  Widget cardMethod() {
+    List<TrackSize> columns = [];
+    List<TrackSize> rows = [];
+    for (var i = 0; i < ancho; i++) {
+      columns.add(1.fr);
+    }
+    for (var i = 0; i < largo; i++) {
+      rows.add(auto);
+    }
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: LayoutGrid(
+        // set some flexible track sizes based on the crossAxisCount
+        columnSizes: columns,
+        // set all the row sizes to auto (self-sizing height)
+        rowSizes: rows,
+        rowGap: 1, // equivalent to mainAxisSpacing
+        columnGap: 1, // equivalent to crossAxisSpacing
+        // note: there's no childAspectRatio
         children: List.generate(cardList.length, (index) {
           return Center(
               child: Container(

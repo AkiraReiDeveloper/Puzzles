@@ -96,9 +96,12 @@ class _BotonGamerState extends State<BotonGamer> with TickerProviderStateMixin {
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Row(
-                          mainAxisAlignment: widget.icon != null ? MainAxisAlignment.spaceBetween : MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            widget.icon != null ? widget.icon : Container(), 
+                            widget.icon != null ? widget.icon : Container(),
+                            widget.icon != null
+                                ? SizedBox(width: 10.0)
+                                : Container(),
                             Stack(
                               children: <Widget>[
                                 Container(
