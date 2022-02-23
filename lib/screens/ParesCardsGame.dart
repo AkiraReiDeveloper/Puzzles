@@ -7,6 +7,7 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 class ParesCardsGame extends StatefulWidget {
   @override
@@ -42,6 +43,7 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
   int ancho = 3;
   int largo = 2;
   String textAnimation;
+  int level = 0;
 
   @override
   void initState() {
@@ -74,13 +76,55 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
     _startStopButtonPressed();
   }
 
+  generarNivel(int nivel) {
+    if (nivel == 0) {
+      ancho = nivel + 2;
+      largo = nivel + 3;
+    } else {
+      if (nivel < 3) {
+        ancho = nivel + 1;
+        largo = nivel + 2;
+      } else {
+        if (nivel < 10) {
+          ancho = 5;
+          largo = 6;
+        } else {
+          if (nivel < 20) {
+            ancho = 6;
+            largo = 7;
+          } else {
+            if (nivel < 30) {
+              ancho = 7;
+              largo = 8;
+            } else {
+              if (nivel < 40) {
+                ancho = 8;
+                largo = 9;
+              } else {
+                ancho = 9;
+                largo = 10;
+              }
+            }
+          }
+        }
+      }
+    }
+    _initialValues(globalIndex = ((ancho * largo) / 2).round());
+  }
+
+  ImageProvider<Object> convertImage(String svgImage) {
+    Image image = Image(
+      image: Svg(svgImage),
+    );
+    return image.image;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final String dimention = ModalRoute.of(context).settings.arguments;
-    if (dimention != null && !gameStart) {
-      ancho = int.parse(dimention.split(new RegExp(r'x'))[0]);
-      largo = int.parse(dimention.split(new RegExp(r'x'))[1]);
-      _initialValues(globalIndex = ((ancho * largo) / 2).round());
+    final String getLevel = ModalRoute.of(context).settings.arguments;
+    if (getLevel != null && !gameStart) {
+      level = int.parse(getLevel);
+      generarNivel(level);
       gameStart = !gameStart;
     }
     return Scaffold(
@@ -135,9 +179,9 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
                 child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage("assets/image/cards/" +
+                            image: convertImage("assets/image/cards/" +
                                 cardList[index].toString() +
-                                ".png"),
+                                ".svg"),
                             fit: BoxFit.contain)),
                     child: cardAnimatedList[index])),
           ));
@@ -182,9 +226,9 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
                 child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage("assets/image/cards/" +
+                            image: convertImage("assets/image/cards/" +
                                 cardList[index].toString() +
-                                ".png"),
+                                ".svg"),
                             fit: BoxFit.contain)),
                     child: cardAnimatedList[index])),
           ));
@@ -384,7 +428,7 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
     int pos = 0;
     List<int> numerosAleatorios = [];
     while (i < dimention) {
-      pos = Random().nextInt(36 + 1);
+      pos = Random().nextInt(151 + 1);
       while (!numerosAleatorios.contains(pos) && pos != 0) {
         numerosAleatorios.add(pos);
         isSelectedList.add(false);
@@ -436,7 +480,13 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
               "\nTiempo: " +
               cronometroTime,
           stars: true,
-          starValue: stars, onContinue: () {
+          starValue: stars,
+          dobleButton: true, onContinueDobleButton: () {
+        Navigator.of(context).pop();
+        Navigator.pop(context);
+        Navigator.pushNamed(context, "cardsgame",
+            arguments: (level + 1).toString());
+      }, onContinue: () {
         setState(() {
           _stopWatch.reset();
           _inicializarValues();

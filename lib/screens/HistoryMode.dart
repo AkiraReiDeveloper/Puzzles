@@ -84,11 +84,7 @@ class _HistoryModeState extends State<HistoryMode> {
                 padding: EdgeInsets.all(0),
                 onPressed: () {
                   Navigator.pushNamed(context, "cardsgame",
-                      arguments: index <= 6
-                          ? (index + 2).toString() +
-                              "x" +
-                              (index + 3).toString()
-                          : "9x8");
+                      arguments: index.toString());
                 },
                 child: Stack(
                   children: <Widget>[

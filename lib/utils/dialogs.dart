@@ -188,15 +188,19 @@ class Dialogs {
         });
   }
 
-  static alertWin(BuildContext context,
-      {String title = '',
-      String message = '',
-      double titleSize = 55,
-      IconData icon = Icons.add_alert,
-      Color color = Colors.cyan,
-      VoidCallback onContinue,
-      bool stars = false,
-      int starValue = 0}) {
+  static alertWin(
+    BuildContext context, {
+    String title = '',
+    String message = '',
+    double titleSize = 55,
+    IconData icon = Icons.add_alert,
+    Color color = Colors.cyan,
+    VoidCallback onContinue,
+    bool stars = false,
+    int starValue = 0,
+    VoidCallback onContinueDobleButton,
+    bool dobleButton = false,
+  }) {
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -239,37 +243,45 @@ class Dialogs {
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
-                                        stars ? Container(
-                                          margin: EdgeInsets.all(10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.stars,
-                                                size: 50,
-                                                color: starValue >= 30 ? Colors.yellow : Colors.grey,
-                                              ),
-                                              Icon(
-                                                Icons.stars,
-                                                size: 70,
-                                                color: starValue >= 50 ? Colors.yellow : Colors.grey,
-                                              ),
-                                              Icon(
-                                                Icons.stars,
-                                                size: 50,
-                                                color: starValue == 100 ? Colors.yellow : Colors.grey,
-                                              ),
-                                            ],
-                                          ),
-                                        ):Container(),
+                                        stars
+                                            ? Container(
+                                                margin: EdgeInsets.all(10),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    Icon(
+                                                      Icons.stars,
+                                                      size: 50,
+                                                      color: starValue >= 30
+                                                          ? Colors.yellow
+                                                          : Colors.grey,
+                                                    ),
+                                                    Icon(
+                                                      Icons.stars,
+                                                      size: 70,
+                                                      color: starValue >= 50
+                                                          ? Colors.yellow
+                                                          : Colors.grey,
+                                                    ),
+                                                    Icon(
+                                                      Icons.stars,
+                                                      size: 50,
+                                                      color: starValue == 100
+                                                          ? Colors.yellow
+                                                          : Colors.grey,
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            : Container(),
                                         Container(
                                           margin: EdgeInsets.all(10),
                                           child: Text(
                                             title,
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              color: Colors.white,
+                                              color: Colors.yellow,
                                               fontFamily: "Gamer",
                                               fontSize: titleSize,
                                             ),
@@ -287,24 +299,56 @@ class Dialogs {
                                             ),
                                           ),
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              top: 10, right: 10),
-                                          child: BotonGamer(
-                                              text: "Aceptar",
-                                              colorCapa1: Color.fromRGBO(
-                                                  237, 166, 0, 1),
-                                              colorCapa2: Color.fromRGBO(
-                                                  255, 206, 0, 1),
-                                              colorCapa3: Color.fromRGBO(
-                                                  250, 229, 0, 1),
-                                              colorCapa4: Color.fromRGBO(
-                                                  251, 237, 85, 0.5),
-                                              borderSize: 10,
-                                              width: 100,
-                                              height: 50,
-                                              textSize: 30,
-                                              onPressed: onContinue),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  top: 10, right: 10),
+                                              child: BotonGamer(
+                                                  text: "Aceptar",
+                                                  colorCapa1: Color.fromRGBO(
+                                                      237, 166, 0, 1),
+                                                  colorCapa2: Color.fromRGBO(
+                                                      255, 206, 0, 1),
+                                                  colorCapa3: Color.fromRGBO(
+                                                      250, 229, 0, 1),
+                                                  colorCapa4: Color.fromRGBO(
+                                                      251, 237, 85, 0.5),
+                                                  borderSize: 10,
+                                                  width: 100,
+                                                  height: 50,
+                                                  textSize: 30,
+                                                  onPressed: onContinue),
+                                            ),
+                                            dobleButton
+                                                ? Container(
+                                                    margin: EdgeInsets.only(
+                                                        top: 10, right: 10),
+                                                    child: BotonGamer(
+                                                        text: "Siguiente",
+                                                        colorCapa1:
+                                                            Color.fromRGBO(
+                                                                0, 19, 81, 1),
+                                                        colorCapa2:
+                                                            Color.fromRGBO(
+                                                                0, 52, 176, 1),
+                                                        colorCapa3:
+                                                            Color.fromRGBO(
+                                                                0, 88, 236, 1),
+                                                        colorCapa4:
+                                                            Color.fromRGBO(251,
+                                                                237, 85, 0.5),
+                                                        borderSize: 10,
+                                                        width: 100,
+                                                        height: 50,
+                                                        textSize: 30,
+                                                        onPressed:
+                                                            onContinueDobleButton),
+                                                  )
+                                                : Container()
+                                          ],
                                         ),
                                       ],
                                     ),
