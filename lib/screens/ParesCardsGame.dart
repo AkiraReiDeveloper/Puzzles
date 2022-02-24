@@ -44,6 +44,7 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
   int largo = 2;
   String textAnimation;
   int level = 0;
+  bool levelMode;
 
   @override
   void initState() {
@@ -72,6 +73,7 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
     movimientos = 0;
     pares = 0;
     combo = 1;
+    levelMode = false;
     stopwatch = new Stopwatch();
     _startStopButtonPressed();
   }
@@ -121,10 +123,19 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
 
   @override
   Widget build(BuildContext context) {
-    final String getLevel = ModalRoute.of(context).settings.arguments;
+    final getLevel =
+        ModalRoute.of(context).settings.arguments as Map<String, int>;
     if (getLevel != null && !gameStart) {
-      level = int.parse(getLevel);
-      generarNivel(level);
+      if (getLevel['nivel'] != -1) {
+        level = getLevel['nivel'];
+        generarNivel(level);
+        levelMode = true;
+      } else {
+        ancho = getLevel['ancho'];
+        largo = getLevel['largo'];
+        _initialValues(globalIndex = ((ancho * largo) / 2).round());
+        print(ancho);
+      }
       gameStart = !gameStart;
     }
     return Scaffold(
@@ -481,12 +492,18 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
               cronometroTime,
           stars: true,
           starValue: stars,
-          dobleButton: true, onContinueDobleButton: () {
-        Navigator.of(context).pop();
-        Navigator.pop(context);
-        Navigator.pushNamed(context, "cardsgame",
-            arguments: (level + 1).toString());
-      }, onContinue: () {
+          dobleButton: levelMode ? true : false,
+          onContinueDobleButton: levelMode
+              ? () {
+                  Navigator.of(context).pop();
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, "cardsgame", arguments: {
+                    'ancho': 0,
+                    'largo': 0,
+                    'nivel': level + 1,
+                  });
+                }
+              : () {}, onContinue: () {
         setState(() {
           _stopWatch.reset();
           _inicializarValues();

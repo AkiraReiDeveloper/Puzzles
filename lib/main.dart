@@ -20,17 +20,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: "splashscreen", 
+      initialRoute: "splashscreen",
       routes: {
-        'home'          : (BuildContext context) => Home(),
-        'gatogame'      : (BuildContext context) => GatoGame(),
+        'home': (BuildContext context) => Home(),
+        'gatogame': (BuildContext context) => GatoGame(),
         //'ahorcadogame'         : ( BuildContext context ) => AhorcadoGame(),
-        'cardsgame'     : ( BuildContext context ) => ParesCardsGame(),
-        'juegorapido'   : ( BuildContext context ) => ModoJuegoRapido(),
-        'modohistoria'   : ( BuildContext context ) => HistoryMode(),
-        'cardsgamemode'   : ( BuildContext context ) => SelectModeCardsGame(),
-        'splashscreen'   : ( BuildContext context ) => SplashScreen(),
-        'pvp'   : ( BuildContext context ) => VsModeGame(),
+        'cardsgame': (BuildContext context) => ParesCardsGame(),
+        'juegorapido': (BuildContext context) => ModoJuegoRapido(),
+        'modohistoria': (BuildContext context) => HistoryMode(),
+        'cardsgamemode': (BuildContext context) => SelectModeCardsGame(),
+        'splashscreen': (BuildContext context) => SplashScreen(),
+        'pvp': (BuildContext context) => VsModeGame(),
       },
     );
   }
