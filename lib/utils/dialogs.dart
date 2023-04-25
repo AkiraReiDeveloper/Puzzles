@@ -421,7 +421,7 @@ class Dialogs {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
-                          child: FlatButton(
+                          child: TextButton(
                             onPressed: onConfirm,
                             child: Row(
                               children: <Widget>[
@@ -440,7 +440,7 @@ class Dialogs {
                           ),
                         ),
                         Container(
-                          child: FlatButton(
+                          child: TextButton(
                             onPressed: onCancel,
                             child: Row(
                               children: <Widget>[

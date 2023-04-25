@@ -124,9 +124,9 @@ class _VsModeGameState extends State<VsModeGame> {
               borderRadius: BorderRadius.all(Radius.circular(5)),
               border: Border.all(color: Colors.black, width: 3),
             ),
-            child: RaisedButton(
-                padding: EdgeInsets.all(0),
-                color: Colors.white,
+            child: ElevatedButton(
+                //padding: EdgeInsets.all(0),
+                //color: Colors.white,
                 onPressed: () => !isSelectedList[index]
                     ? _onClick(index, cardList[index])
                     : () {},
@@ -171,9 +171,9 @@ class _VsModeGameState extends State<VsModeGame> {
               borderRadius: BorderRadius.all(Radius.circular(5)),
               border: Border.all(color: Colors.black, width: 3),
             ),
-            child: RaisedButton(
-                padding: EdgeInsets.all(0),
-                color: Colors.white,
+            child: ElevatedButton(
+                //padding: EdgeInsets.all(0),
+                //color: Colors.white,
                 onPressed: () => !isSelectedList[index]
                     ? _onClick(index, cardList[index])
                     : () {},

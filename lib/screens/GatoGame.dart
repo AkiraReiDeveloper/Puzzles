@@ -177,8 +177,8 @@ class _GatoGameState extends State<GatoGame> {
                 color: colors.elementAt(index),
                 borderRadius: BorderRadius.all(Radius.circular(5)),
                 border: Border.all(color: Colors.white, width: 3)),
-            child: RaisedButton(
-              color: Colors.transparent,
+            child: ElevatedButton(
+              //color: Colors.transparent,
               onPressed: () => _onClick(index),
               child: Container(child: listaWidgetAnimated[index]),
             ),

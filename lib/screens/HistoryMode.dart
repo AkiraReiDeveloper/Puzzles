@@ -80,8 +80,8 @@ class _HistoryModeState extends State<HistoryMode> {
               border:
                   Border.all(color: Color.fromRGBO(248, 6, 50, 1), width: 3),
             ),
-            child: RaisedButton(
-                padding: EdgeInsets.all(0),
+            child: ElevatedButton(
+                //padding: EdgeInsets.all(0),
                 onPressed: () {
                   Navigator.pushNamed(context, "cardsgame", arguments: {
                     'ancho': 0,
