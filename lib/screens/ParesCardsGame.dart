@@ -231,6 +231,10 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
             child: ElevatedButton(
                 //padding: EdgeInsets.all(0),
                 //color: Colors.white,
+                style: ButtonStyle(
+                  padding:
+                      MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(0)),
+                ),
                 onPressed: () => !isSelectedList[index]
                     ? _onClick(index, cardList[index])
                     : () {},

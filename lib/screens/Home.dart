@@ -1,7 +1,7 @@
 import 'package:demogame/utils/animated_card_background.dart';
 import 'package:demogame/utils/animations_comments.dart';
 import 'package:demogame/utils/botonGamer.dart';
-//import 'package:demogame/utils/sounds.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:demogame/utils/userPreferences.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +33,12 @@ class _HomeState extends State<Home> {
     super.dispose();
   }
 
+  Future<void> playAudio() async {
+    final player = AudioPlayer();
+    await player.setSourceAsset('assets/music/mouse_click_sound_effect.mp3');
+    await player.play;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,31 +49,65 @@ class _HomeState extends State<Home> {
             height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              image: DecorationImage(
-                  colorFilter: ColorFilter.mode(
-                      Color.fromRGBO(0, 89, 236, 0.5), BlendMode.color),
-                  fit: BoxFit.fill,
-                  image: AssetImage(
-                    "assets/image/background/background_mosaico.png",
-                  )),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color.fromRGBO(0, 37, 173, 1),
+                  Color.fromRGBO(1, 23, 107, 1),
+                  Color.fromRGBO(0, 17, 85, 1),
+                  Color.fromRGBO(1, 13, 62, 1),
+                ],
+                stops: [0.0, 0.25, 0.5, 0.75],
+              ),
             ),
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
                 Animations(),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    padding: EdgeInsets.only(top: 80),
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                            child: Text(
+                          "Puzzles",
+                          style: TextStyle(
+                              color: Color.fromRGBO(190, 145, 0, 1),
+                              fontSize: 90,
+                              fontFamily: "Gamer",
+                              height: .95),
+                          textAlign: TextAlign.center,
+                        )),
+                        Container(
+                            child: Text(
+                          "Puzzles",
+                          style: TextStyle(
+                              color: Colors.yellowAccent,
+                              fontSize: 90,
+                              fontFamily: "Gamer"),
+                          textAlign: TextAlign.center,
+                        )),
+                      ],
+                    ),
+                  ),
+                ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
                       child: BotonGamer(
-                        text: "Gato",
+                        text: "Tres en linea",
                         colorCapa1: Color.fromRGBO(0, 19, 81, 1),
                         colorCapa2: Color.fromRGBO(0, 52, 176, 1),
                         colorCapa3: Color.fromRGBO(0, 88, 236, 1),
                         colorCapa4: Color.fromRGBO(85, 143, 242, 0.5),
                         borderSize: 10,
-                        width: 250,
+                        width: MediaQuery.of(context).size.width - 100,
                         onPressed: () {
+                          playAudio();
                           Navigator.pushNamed(context, "gatogame");
                         },
                         icon: Container(
@@ -90,7 +130,7 @@ class _HomeState extends State<Home> {
                         colorCapa3: Color.fromRGBO(0, 88, 236, 1),
                         colorCapa4: Color.fromRGBO(85, 143, 242, 0.5),
                         borderSize: 10,
-                        width: 250,
+                        width: MediaQuery.of(context).size.width - 100,
                         onPressed: () {
                           Navigator.pushNamed(context, "cardsgamemode");
                         },

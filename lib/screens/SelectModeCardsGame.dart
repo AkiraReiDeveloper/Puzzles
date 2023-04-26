@@ -17,13 +17,17 @@ class _SelectModeCardsGameState extends State<SelectModeCardsGame> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
-            image: DecorationImage(
-                colorFilter: ColorFilter.mode(
-                    Color.fromRGBO(248, 6, 50, 0.5), BlendMode.color),
-                fit: BoxFit.fill,
-                image: AssetImage(
-                  "assets/image/background/background_mosaico.png",
-                )),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color.fromRGBO(0, 37, 173, 1),
+                Color.fromRGBO(1, 23, 107, 1),
+                Color.fromRGBO(0, 17, 85, 1),
+                Color.fromRGBO(1, 13, 62, 1),
+              ],
+              stops: [0.0, 0.25, 0.5, 0.75],
+            ),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

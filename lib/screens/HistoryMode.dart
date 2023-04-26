@@ -19,13 +19,7 @@ class _HistoryModeState extends State<HistoryMode> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
-            image: DecorationImage(
-                colorFilter: ColorFilter.mode(
-                    Color.fromRGBO(248, 6, 50, 0.5), BlendMode.color),
-                fit: BoxFit.fill,
-                image: AssetImage(
-                  "assets/image/background/background_mosaico.png",
-                )),
+            color: Color.fromRGBO(30, 30, 30, 1),
           ),
           child: Column(
             children: <Widget>[
@@ -74,7 +68,7 @@ class _HistoryModeState extends State<HistoryMode> {
         children: List.generate(100, (index) {
           return Center(
               child: Container(
-            margin: EdgeInsets.all(.5),
+            margin: EdgeInsets.all(2),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(5)),
               border:
@@ -82,6 +76,10 @@ class _HistoryModeState extends State<HistoryMode> {
             ),
             child: ElevatedButton(
                 //padding: EdgeInsets.all(0),
+                style: ButtonStyle(
+                  padding:
+                      MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(0)),
+                ),
                 onPressed: () {
                   Navigator.pushNamed(context, "cardsgame", arguments: {
                     'ancho': 0,
