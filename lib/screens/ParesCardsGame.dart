@@ -18,33 +18,33 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
   //Grid Values
   //List<ItemCardData> cardContent;
 
-  List<Widget> cardAnimatedList;
-  List<int> cardList;
-  List<bool> isSelectedList;
-  int cardSelected1;
-  int cardSelected2;
-  int cardIndex1;
-  int cardIndex2;
-  int globalIndex = 0;
-  int stars;
-  int cardSelected;
-  bool isProcessed;
-  bool gameStart;
-  bool sonPares;
+  List<Widget>? cardAnimatedList;
+  List<int>? cardList;
+  List<bool>? isSelectedList;
+  int? cardSelected1;
+  int? cardSelected2;
+  int? cardIndex1;
+  int? cardIndex2;
+  int? globalIndex = 0;
+  int? stars;
+  int cardSelected = 0;
+  bool? isProcessed;
+  bool? gameStart;
+  bool? sonPares;
 //cronometro
   final _stopWatch = new Stopwatch();
   final _timeout = const Duration(seconds: 1);
-  Stopwatch stopwatch;
-  String cronometroTime;
-  int puntos;
-  int movimientos;
-  int pares;
-  int combo;
-  int ancho = 3;
-  int largo = 2;
-  String textAnimation;
+  Stopwatch? stopwatch;
+  String? cronometroTime;
+  int puntos = 0;
+  int movimientos = 0;
+  int pares = 0;
+  int combo = 0;
+  int? ancho = 3;
+  int? largo = 2;
+  String? textAnimation;
   int level = 0;
-  bool levelMode;
+  bool? levelMode;
 
   @override
   void initState() {
@@ -111,7 +111,7 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
         }
       }
     }
-    _initialValues(globalIndex = ((ancho * largo) / 2).round());
+    _initialValues(globalIndex = ((ancho! * largo!) / 2).round());
   }
 
   ImageProvider<Object> convertImage(String svgImage) {
@@ -124,19 +124,19 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
   @override
   Widget build(BuildContext context) {
     final getLevel =
-        ModalRoute.of(context).settings.arguments as Map<String, int>;
-    if (getLevel != null && !gameStart) {
+        ModalRoute.of(context)!.settings.arguments as Map<String, int>;
+    if (getLevel != null && !gameStart!) {
       if (getLevel['nivel'] != -1) {
-        level = getLevel['nivel'];
+        level = getLevel['nivel']!;
         generarNivel(level);
         levelMode = true;
       } else {
         ancho = getLevel['ancho'];
         largo = getLevel['largo'];
-        _initialValues(globalIndex = ((ancho * largo) / 2).round());
+        _initialValues(globalIndex = ((ancho! * largo!) / 2).round());
         print(ancho);
       }
-      gameStart = !gameStart;
+      gameStart = !gameStart!;
     }
     return Scaffold(
       appBar: new PreferredSize(
@@ -161,7 +161,7 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
               ],
             ),
           ),
-          sonPares ? AnimationsComments(textAnimation) : Container(),
+          sonPares! ? AnimationsComments(textAnimation!) : Container(),
         ],
       )),
     );
@@ -171,9 +171,9 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
     return Container(
       margin: EdgeInsets.all(10),
       child: GridView.count(
-        crossAxisCount: ancho,
+        crossAxisCount: ancho!,
         childAspectRatio: (3 / 3),
-        children: List.generate(cardList.length, (index) {
+        children: List.generate(cardList!.length, (index) {
           return Center(
               child: Container(
             margin: EdgeInsets.all(.5),
@@ -184,17 +184,17 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
             child: ElevatedButton(
                 //padding: EdgeInsets.all(0),
                 //color: Colors.white,
-                onPressed: () => !isSelectedList[index]
-                    ? _onClick(index, cardList[index])
+                onPressed: () => !isSelectedList![index]
+                    ? _onClick(index, cardList![index])
                     : () {},
                 child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: convertImage("assets/image/cards/" +
-                                cardList[index].toString() +
+                                cardList![index].toString() +
                                 ".svg"),
                             fit: BoxFit.contain)),
-                    child: cardAnimatedList[index])),
+                    child: cardAnimatedList![index])),
           ));
         }),
       ),
@@ -204,10 +204,10 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
   Widget cardMethod() {
     List<TrackSize> columns = [];
     List<TrackSize> rows = [];
-    for (var i = 0; i < ancho; i++) {
+    for (var i = 0; i < ancho!; i++) {
       columns.add(1.fr);
     }
-    for (var i = 0; i < largo; i++) {
+    for (var i = 0; i < largo!; i++) {
       rows.add(auto);
     }
     return Container(
@@ -220,7 +220,7 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
         rowGap: 1, // equivalent to mainAxisSpacing
         columnGap: 1, // equivalent to crossAxisSpacing
         // note: there's no childAspectRatio
-        children: List.generate(cardList.length, (index) {
+        children: List.generate(cardList!.length, (index) {
           return Center(
               child: Container(
             margin: EdgeInsets.all(.5),
@@ -235,17 +235,17 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
                   padding:
                       MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(0)),
                 ),
-                onPressed: () => !isSelectedList[index]
-                    ? _onClick(index, cardList[index])
+                onPressed: () => !isSelectedList![index]
+                    ? _onClick(index, cardList![index])
                     : () {},
                 child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: convertImage("assets/image/cards/" +
-                                cardList[index].toString() +
+                                cardList![index].toString() +
                                 ".svg"),
                             fit: BoxFit.contain)),
-                    child: cardAnimatedList[index])),
+                    child: cardAnimatedList![index])),
           ));
         }),
       ),
@@ -349,7 +349,7 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
                         decoration: BoxDecoration(
                             color: Colors.white70,
                             borderRadius: BorderRadius.circular(5)),
-                        child: Text(cronometroTime,
+                        child: Text(cronometroTime!,
                             textAlign: TextAlign.right,
                             style:
                                 TextStyle(fontSize: 25, fontFamily: "Gamer")),
@@ -377,10 +377,10 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
   }
 
   _onClick(int index, int cardIndex) {
-    if (!isProcessed) {
+    if (!isProcessed!) {
       setState(() {
-        cardAnimatedList[index] = _cardAnimated("card_animation_left");
-        isSelectedList[index] = true;
+        cardAnimatedList![index] = _cardAnimated("card_animation_left");
+        isSelectedList![index] = true;
       });
       _validCardPar(index, cardIndex);
     }
@@ -396,11 +396,11 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
       cardSelected2 = cardIndex;
       if (cardSelected1 == cardSelected2) {
         setState(() {
-          combo > 1
+          combo! > 1
               ? textAnimation = "Combo X" + combo.toString()
               : textAnimation = "¡Bien!";
           cardSelected = 0;
-          puntos += 100 * combo;
+          puntos += 100 * combo!;
           combo++;
           movimientos++;
           pares++;
@@ -419,10 +419,12 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
         });
         await Future.delayed(const Duration(seconds: 1), () {});
         setState(() {
-          isSelectedList[cardIndex1] = false;
-          isSelectedList[cardIndex2] = false;
-          cardAnimatedList[cardIndex1] = _cardAnimated("card_animation_right");
-          cardAnimatedList[cardIndex2] = _cardAnimated("card_animation_right");
+          isSelectedList![cardIndex1!] = false;
+          isSelectedList![cardIndex2!] = false;
+          cardAnimatedList![cardIndex1!] =
+              _cardAnimated("card_animation_right");
+          cardAnimatedList![cardIndex2!] =
+              _cardAnimated("card_animation_right");
           isProcessed = false;
           cardSelected = 0;
         });
@@ -446,10 +448,10 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
       pos = Random().nextInt(151 + 1);
       while (!numerosAleatorios.contains(pos) && pos != 0) {
         numerosAleatorios.add(pos);
-        isSelectedList.add(false);
-        isSelectedList.add(false);
-        cardAnimatedList.add(_cardAnimated(""));
-        cardAnimatedList.add(_cardAnimated(""));
+        isSelectedList!.add(false);
+        isSelectedList!.add(false);
+        cardAnimatedList!.add(_cardAnimated(""));
+        cardAnimatedList!.add(_cardAnimated(""));
         i++;
       }
     }
@@ -458,19 +460,19 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
   }
 
   _calcularPuntos() {
-    int valorBase = ancho * largo;
-    int valorTiempo = int.parse(cronometroTime.replaceAll(":", ""));
-    puntos += (puntos / movimientos).round();
-    puntos += (puntos / valorTiempo).round();
-    if (movimientos <= valorBase && valorTiempo <= ancho * 100) {
+    int valorBase = ancho! * largo!;
+    int valorTiempo = int.parse(cronometroTime!.replaceAll(":", ""));
+    puntos = puntos! + (puntos! / movimientos!).round();
+    puntos = puntos! + (puntos! / valorTiempo).round();
+    if (movimientos! <= valorBase && valorTiempo <= ancho! * 100) {
       stars = 100;
     } else {
-      if (movimientos <= (valorBase * 1.3).round() &&
-          valorTiempo <= ((ancho * 100) * 1.3).round()) {
+      if (movimientos! <= (valorBase * 1.3).round() &&
+          valorTiempo <= ((ancho! * 100) * 1.3).round()) {
         stars = 50;
       } else {
-        if (movimientos <= (valorBase * 1.5).round() &&
-            valorTiempo <= ((ancho * 100) * 1.5).round()) {
+        if (movimientos! <= (valorBase * 1.5).round() &&
+            valorTiempo <= ((ancho! * 100) * 1.5).round()) {
           stars = 30;
         } else {
           stars = 0;
@@ -493,11 +495,11 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
               "\nMovimientos: " +
               movimientos.toString() +
               "\nTiempo: " +
-              cronometroTime,
+              cronometroTime!,
           stars: true,
-          starValue: stars,
-          dobleButton: levelMode ? true : false,
-          onContinueDobleButton: levelMode
+          starValue: stars!,
+          dobleButton: levelMode! ? true : false,
+          onContinueDobleButton: levelMode!
               ? () {
                   Navigator.of(context).pop();
                   Navigator.pop(context);
@@ -511,7 +513,7 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
         setState(() {
           _stopWatch.reset();
           _inicializarValues();
-          _initialValues(globalIndex);
+          _initialValues(globalIndex!);
         });
         Navigator.of(context).pop();
       });
@@ -520,8 +522,8 @@ class _ParesCardsGameState extends State<ParesCardsGame> {
 
   _taparCartas() {
     int i = 0;
-    while (i < globalIndex + globalIndex) {
-      cardAnimatedList[i] = _cardAnimated("card_animation_right");
+    while (i < globalIndex! + globalIndex!) {
+      cardAnimatedList![i] = _cardAnimated("card_animation_right");
       i++;
     }
   }

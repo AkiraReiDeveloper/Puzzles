@@ -10,7 +10,7 @@ class Dialogs {
       //double width = 400,
       double height = 300,
       Color color = Colors.cyan,
-      VoidCallback onContinue,
+      VoidCallback? onContinue,
       bool localMethod = true}) {
     showDialog(
         context: context,
@@ -178,7 +178,7 @@ class Dialogs {
                                               height: 40,
                                               textSize: 30,
                                               borderSize: 5,
-                                              onPressed: onContinue),
+                                              onPressed: onContinue!),
                                         ),
                                       ],
                                     ),
@@ -195,10 +195,10 @@ class Dialogs {
     double titleSize = 55,
     IconData icon = Icons.add_alert,
     Color color = Colors.cyan,
-    VoidCallback onContinue,
+    VoidCallback? onContinue,
     bool stars = false,
     int starValue = 0,
-    VoidCallback onContinueDobleButton,
+    VoidCallback? onContinueDobleButton,
     bool dobleButton = false,
   }) {
     showDialog(
@@ -320,7 +320,7 @@ class Dialogs {
                                                   width: 100,
                                                   height: 50,
                                                   textSize: 30,
-                                                  onPressed: onContinue),
+                                                  onPressed: onContinue!),
                                             ),
                                             dobleButton
                                                 ? Container(
@@ -345,7 +345,7 @@ class Dialogs {
                                                         height: 50,
                                                         textSize: 30,
                                                         onPressed:
-                                                            onContinueDobleButton),
+                                                            onContinueDobleButton!),
                                                   )
                                                 : Container()
                                           ],
@@ -365,8 +365,8 @@ class Dialogs {
       double width = 300,
       double height = 220,
       Color color = Colors.cyan,
-      VoidCallback onCancel,
-      VoidCallback onConfirm}) {
+      VoidCallback? onCancel,
+      VoidCallback? onConfirm}) {
     showDialog(
         context: context,
         builder: (context) {
@@ -472,8 +472,8 @@ class Dialogs {
       double width = 300,
       double height = 220,
       Color color = Colors.cyan,
-      VoidCallback onConfirmX,
-      VoidCallback onConfirmO}) {
+      VoidCallback? onConfirmX,
+      VoidCallback? onConfirmO}) {
     showDialog(
         context: context,
         builder: (context) {
@@ -541,7 +541,7 @@ class Dialogs {
                             width: 100,
                             height: 120,
                             borderSize: 10,
-                            onPressed: onConfirmX),
+                            onPressed: onConfirmX!),
                         BotonGamer(
                             text: "O",
                             textSize: 100,
@@ -552,7 +552,7 @@ class Dialogs {
                             width: 100,
                             height: 120,
                             borderSize: 10,
-                            onPressed: onConfirmO)
+                            onPressed: onConfirmO!)
                       ],
                     ),
                   )

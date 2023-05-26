@@ -13,10 +13,10 @@ class BotonGamer extends StatefulWidget {
   final double width;
   final double height;
   final Color textColor;
-  final Widget icon;
+  final Widget? icon;
 
   BotonGamer(
-      {@required this.text,
+      {required this.text,
       this.textSize = 45,
       this.colorCapa0 = Colors.black,
       this.colorCapa1 = Colors.white10,
@@ -25,7 +25,7 @@ class BotonGamer extends StatefulWidget {
       this.colorCapa4 = Colors.white30,
       this.width = 150.0,
       this.height = 90.0,
-      @required this.onPressed,
+      required this.onPressed,
       this.borderSize = 15,
       this.textColor = Colors.white,
       this.icon});
@@ -37,7 +37,7 @@ class BotonGamer extends StatefulWidget {
 class _BotonGamerState extends State<BotonGamer> with TickerProviderStateMixin {
   var squareScaleA = 1.0;
 
-  AnimationController _controllerA;
+  AnimationController? _controllerA;
 
   @override
   void initState() {
@@ -46,9 +46,9 @@ class _BotonGamerState extends State<BotonGamer> with TickerProviderStateMixin {
         lowerBound: 0.90,
         upperBound: 1.0,
         duration: Duration(microseconds: 1000));
-    _controllerA.addListener(() {
+    _controllerA!.addListener(() {
       setState(() {
-        squareScaleA = _controllerA.value;
+        squareScaleA = _controllerA!.value;
       });
     });
     super.initState();
@@ -56,7 +56,7 @@ class _BotonGamerState extends State<BotonGamer> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    _controllerA.dispose();
+    _controllerA!.dispose();
     super.dispose();
   }
 
@@ -98,7 +98,7 @@ class _BotonGamerState extends State<BotonGamer> with TickerProviderStateMixin {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            widget.icon != null ? widget.icon : Container(),
+                            widget.icon != null ? widget.icon! : Container(),
                             widget.icon != null
                                 ? SizedBox(width: 10.0)
                                 : Container(),

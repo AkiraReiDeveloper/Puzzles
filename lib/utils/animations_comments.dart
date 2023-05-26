@@ -25,20 +25,20 @@ class _CuadradoAnimations extends StatefulWidget {
 
 class __CuadradoAnimationsState extends State<_CuadradoAnimations>
     with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation<double> scale;
-  Animation<double> opacityOut;
+  AnimationController? controller;
+  Animation<double>? scale;
+  Animation<double>? opacityOut;
 
   @override
   void initState() {
     controller = new AnimationController(
         vsync: this, duration: Duration(milliseconds: 500));
     scale = Tween(begin: 0.0, end: 1.0)
-        .animate(CurvedAnimation(parent: controller, curve: Curves.linear));
+        .animate(CurvedAnimation(parent: controller!, curve: Curves.linear));
     opacityOut = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-        parent: controller, curve: Interval(0.75, 1.0, curve: Curves.linear)));
-    controller.addListener(() {
-      if (controller.status == AnimationStatus.completed) {
+        parent: controller!, curve: Interval(0.75, 1.0, curve: Curves.linear)));
+    controller!.addListener(() {
+      if (controller!.status == AnimationStatus.completed) {
         //controller.repeat();
       }
     });
@@ -47,20 +47,20 @@ class __CuadradoAnimationsState extends State<_CuadradoAnimations>
 
   @override
   void dispose() {
-    controller.dispose();
+    controller!.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    controller.forward();
+    controller!.forward();
     return AnimatedBuilder(
-      animation: controller,
+      animation: controller!,
       child: _Cuadrado(widget.text),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext? context, Widget? child) {
         return Transform.scale(
-          scale: scale.value,
-          child: Opacity(opacity: opacityOut.value, child: child),
+          scale: scale!.value,
+          child: Opacity(opacity: opacityOut!.value, child: child),
         );
       },
     );
@@ -74,28 +74,26 @@ class _Cuadrado extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Stack(
-            children: <Widget>[
-              Container(
-                  child: Text(
-                text,
-                style: TextStyle(
-                    color: Color.fromRGBO(190, 145, 0, 1),
-                    fontSize: 70,
-                    fontFamily: "Gamer",
-                    height: 0.90),
-                textAlign: TextAlign.center,
-              )),
-              Container(
-                  child: Text(
-                    text,
-                    style: TextStyle(
-                        color: Colors.yellowAccent,
-                        fontSize: 70,
-                        fontFamily: "Gamer"),
-                    textAlign: TextAlign.center,
-                  )),
-            ],
-          ),
+        children: <Widget>[
+          Container(
+              child: Text(
+            text,
+            style: TextStyle(
+                color: Color.fromRGBO(190, 145, 0, 1),
+                fontSize: 70,
+                fontFamily: "Gamer",
+                height: 0.90),
+            textAlign: TextAlign.center,
+          )),
+          Container(
+              child: Text(
+            text,
+            style: TextStyle(
+                color: Colors.yellowAccent, fontSize: 70, fontFamily: "Gamer"),
+            textAlign: TextAlign.center,
+          )),
+        ],
+      ),
     );
   }
 }

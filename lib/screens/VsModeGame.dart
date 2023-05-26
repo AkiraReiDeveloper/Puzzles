@@ -14,27 +14,27 @@ class VsModeGame extends StatefulWidget {
 }
 
 class _VsModeGameState extends State<VsModeGame> {
-  List<Widget> cardAnimatedList;
-  List<int> cardList;
-  List<bool> isSelectedList;
-  int cardSelected1;
-  int cardSelected2;
-  int cardIndex1;
-  int cardIndex2;
+  List<Widget> cardAnimatedList = [];
+  List<int> cardList = [];
+  List<bool> isSelectedList = [];
+  int cardSelected1 = 0;
+  int cardSelected2 = 0;
+  int cardIndex1 = 0;
+  int cardIndex2 = 0;
   int globalIndex = 0;
-  int stars;
-  int cardSelected;
-  bool isProcessed;
-  bool gameStart;
-  bool sonPares;
-  bool playerActive;
-  int pares;
-  int combo;
+  int stars = 0;
+  int cardSelected = 0;
+  bool? isProcessed;
+  bool? gameStart;
+  bool? sonPares;
+  bool? playerActive;
+  int pares = 0;
+  int combo = 0;
   int ancho = 3;
   int largo = 2;
-  String textAnimation;
-  int paresPlayer1;
-  int paresPlayer2;
+  String textAnimation = '';
+  int paresPlayer1 = 0;
+  int paresPlayer2 = 0;
 
   @override
   void initState() {
@@ -75,11 +75,11 @@ class _VsModeGameState extends State<VsModeGame> {
   @override
   Widget build(BuildContext context) {
     //final String dimention = ModalRoute.of(context).settings.arguments;
-    if (true && !gameStart) {
+    if (true && !gameStart!) {
       ancho = 6;
       largo = 7;
       _initialValues(globalIndex = ((ancho * largo) / 2).round());
-      gameStart = !gameStart;
+      gameStart = !gameStart!;
     }
     return Scaffold(
       appBar: new PreferredSize(
@@ -104,7 +104,7 @@ class _VsModeGameState extends State<VsModeGame> {
               ],
             ),
           ),
-          sonPares ? AnimationsComments(textAnimation) : Container(),
+          sonPares! ? AnimationsComments(textAnimation) : Container(),
         ],
       )),
     );
@@ -228,14 +228,14 @@ class _VsModeGameState extends State<VsModeGame> {
                         child: Container(
                             margin: EdgeInsets.all(2.7),
                             decoration: BoxDecoration(
-                                color: playerActive
+                                color: playerActive!
                                     ? Color.fromRGBO(0, 19, 81, 1)
                                     : Colors.white12,
                                 borderRadius: BorderRadius.circular(15)),
                             child: Container(
                               margin: EdgeInsets.only(bottom: 7),
                               decoration: BoxDecoration(
-                                  color: playerActive
+                                  color: playerActive!
                                       ? Color.fromRGBO(0, 88, 236, 1)
                                       : Colors.white24,
                                   border: Border.all(
@@ -298,14 +298,14 @@ class _VsModeGameState extends State<VsModeGame> {
                         child: Container(
                             margin: EdgeInsets.all(2.7),
                             decoration: BoxDecoration(
-                                color: playerActive
+                                color: playerActive!
                                     ? Colors.white12
                                     : Color.fromRGBO(165, 4, 33, 1),
                                 borderRadius: BorderRadius.circular(15)),
                             child: Container(
                               margin: EdgeInsets.only(bottom: 7),
                               decoration: BoxDecoration(
-                                  color: playerActive
+                                  color: playerActive!
                                       ? Colors.white24
                                       : Color.fromRGBO(241, 6, 49, 1),
                                   border: Border.all(
@@ -369,7 +369,7 @@ class _VsModeGameState extends State<VsModeGame> {
   }
 
   _onClick(int index, int cardIndex) {
-    if (!isProcessed) {
+    if (!isProcessed!) {
       setState(() {
         cardAnimatedList[index] = _cardAnimated("card_animation_left");
         isSelectedList[index] = true;
@@ -393,7 +393,7 @@ class _VsModeGameState extends State<VsModeGame> {
               ? textAnimation = "Combo X" + combo.toString()
               : textAnimation = "¡Bien!";
           cardSelected = 0;
-          if (playerActive) {
+          if (playerActive!) {
             paresPlayer1++;
           } else {
             paresPlayer2++;
@@ -423,7 +423,7 @@ class _VsModeGameState extends State<VsModeGame> {
           cardSelected = 0;
         });
       }
-      if (!change) playerActive = !playerActive;
+      if (!change) playerActive = !playerActive!;
     }
   }
 

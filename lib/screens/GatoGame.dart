@@ -14,12 +14,12 @@ class _GatoGameState extends State<GatoGame> {
   //Sounds soundsEffects = new Sounds();
   String player1Wins = "";
   String player2Wins = "";
-  String player1;
-  Widget player1Animated;
-  String player2;
-  Widget player2Animated;
-  Color player1Color;
-  Color player2Color;
+  String player1 = '';
+  Widget? player1Animated;
+  String player2 = '';
+  Widget? player2Animated;
+  Color? player1Color;
+  Color? player2Color;
   int numPlayer1 = 0;
   int numPlayer2 = 0;
   bool isSelected = false;
@@ -303,16 +303,16 @@ class _GatoGameState extends State<GatoGame> {
         if (!listaIsSelected[index]) {
           if (!iterate) {
             listaString[index] = player1;
-            listaWidgetAnimated[index] = player1Animated;
+            listaWidgetAnimated[index] = player1Animated!;
             iterate = true;
             player1Wins = player1Wins + index.toString();
-            colors[index] = player1Color;
+            colors[index] = player1Color!;
           } else {
             listaString[index] = player2;
-            listaWidgetAnimated[index] = player2Animated;
+            listaWidgetAnimated[index] = player2Animated!;
             iterate = false;
             player2Wins = player2Wins + index.toString();
-            colors[index] = player2Color;
+            colors[index] = player2Color!;
           }
           listaIsSelected[index] = true;
         }
@@ -342,7 +342,7 @@ class _GatoGameState extends State<GatoGame> {
         iterate = true;
         numPlayer1 += 1;
         if (numPlayer1 < 5) {
-          wingsMarkersX[numPlayer1 - 1] = markerWinBar(player1Color);
+          wingsMarkersX[numPlayer1 - 1] = markerWinBar(player1Color!);
         }
         resetValues();
       });
@@ -360,7 +360,7 @@ class _GatoGameState extends State<GatoGame> {
           iterate = false;
           numPlayer2 += 1;
           if (numPlayer2 < 5) {
-            wingsMarkersO[numPlayer2 - 1] = markerWinBar(player2Color);
+            wingsMarkersO[numPlayer2 - 1] = markerWinBar(player2Color!);
           }
           resetValues();
         });
@@ -382,7 +382,7 @@ class _GatoGameState extends State<GatoGame> {
         iterate = true;
         numPlayer1 += 1;
         if (numPlayer1 < 5) {
-          wingsMarkersX[numPlayer1 - 1] = markerWinBar(player1Color);
+          wingsMarkersX[numPlayer1 - 1] = markerWinBar(player1Color!);
         }
         resetValues();
       });
@@ -400,7 +400,7 @@ class _GatoGameState extends State<GatoGame> {
           iterate = false;
           numPlayer2 += 1;
           if (numPlayer2 < 5) {
-            wingsMarkersO[numPlayer2 - 1] = markerWinBar(player2Color);
+            wingsMarkersO[numPlayer2 - 1] = markerWinBar(player2Color!);
           }
           resetValues();
         });
@@ -419,7 +419,7 @@ class _GatoGameState extends State<GatoGame> {
         iterate = true;
         numPlayer1 += 1;
         if (numPlayer1 < 5) {
-          wingsMarkersX[numPlayer1 - 1] = markerWinBar(player1Color);
+          wingsMarkersX[numPlayer1 - 1] = markerWinBar(player1Color!);
         }
         resetValues();
       });
@@ -434,7 +434,7 @@ class _GatoGameState extends State<GatoGame> {
           iterate = false;
           numPlayer2 += 1;
           if (numPlayer2 < 5) {
-            wingsMarkersO[numPlayer2 - 1] = markerWinBar(player2Color);
+            wingsMarkersO[numPlayer2 - 1] = markerWinBar(player2Color!);
           }
           resetValues();
         });
